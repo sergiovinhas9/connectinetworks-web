@@ -1,0 +1,277 @@
+/* ==========================================================================
+   RESET E VARIÁVEIS GLOBAIS (DESIGN SYSTEM BASE)
+   ========================================================================== */
+:root {
+    /* Paleta Dark Mode (NOC/SOC Style) */
+    --bg-primary: #0b1120;       /* Fundo principal (Azul/Preto muito escuro) */
+    --bg-secondary: #1e293b;     /* Fundo de cartões e seções secundárias */
+    --bg-tertiary: #003D29;      /* Verde escuro extraído da logo para sobreposições */
+    
+    /* Cores de Destaque e Texto */
+    --accent-color: #00ff88;     /* Verde Tech vibrante para botões e links */
+    --accent-hover: #00cc6a;     /* Tom mais escuro para efeito de hover */
+    --text-main: #f8fafc;        /* Texto principal (Branco gelo) */
+    --text-muted: #94a3b8;       /* Texto secundário (Cinza para descrições) */
+    
+    /* Layout e Transições */
+    --transition-speed: 0.3s;
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA E UTILITÁRIOS
+   ========================================================================== */
+h1, h2, h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-main);
+    transition: color var(--transition-speed);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: background-color var(--transition-speed), transform 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   HEADER E NAVEGAÇÃO
+   ========================================================================== */
+.header {
+    background-color: rgba(11, 17, 32, 0.95); /* Efeito vidro translúcido */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    height: 40px; /* Ajuste conforme a proporção da sua logo */
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a:hover {
+    color: var(--accent-color);
+}
+
+/* Menu Mobile Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-main);
+    transition: var(--transition-speed);
+}
+
+/* ==========================================================================
+   SEÇÕES PRINCIPAIS
+   ========================================================================== */
+section {
+    padding: 100px 0 60px 0; /* Padding superior para compensar o header fixo */
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at top right, var(--bg-tertiary) 0%, var(--bg-primary) 60%);
+    text-align: left;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+/* Serviços (Accordions) */
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.service-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.accordion {
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: var(--transition-speed);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion:hover, .accordion.active {
+    background-color: var(--bg-tertiary);
+}
+
+/* Ícone de expansão (+ e -) criado via CSS */
+.accordion::after {
+    content: '\002B'; /* Sinal de Mais */
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.accordion.active::after {
+    content: "\2212"; /* Sinal de Menos */
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: var(--bg-secondary);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.panel ul {
+    padding: 15px 0 15px 20px;
+    color: var(--text-muted);
+}
+
+.panel ul li {
+    margin-bottom: 8px;
+}
+
+/* Diferenciais e Contato */
+.differentiators ul {
+    list-style-type: square;
+    padding-left: 20px;
+    color: var(--text-muted);
+}
+
+.differentiators ul li {
+    margin-bottom: 10px;
+}
+
+.contact {
+    background-color: var(--bg-secondary);
+    text-align: center;
+    border-top: 2px solid var(--accent-color);
+}
+
+/* Rodapé */
+.footer {
+    background-color: #05080f;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVIDADE - ROTEAMENTO DE INTERFACE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .nav {
+        display: none; /* Esconde o menu normal no mobile */
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-secondary);
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
+    }
+    
+    .nav.active {
+        display: flex;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
