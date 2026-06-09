@@ -93,8 +93,18 @@ a {
     padding: 15px 0;
 }
 
+/* Patch de Contraste do Logotipo em Ambiente Escuro */
 .logo {
-    height: 40px; /* Ajuste conforme a proporção da sua logo */
+    height: 45px; 
+    background-color: rgba(255, 255, 255, 0.95); /* Encapsulamento claro */
+    padding: 6px 16px; /* Respiro interno */
+    border-radius: 6px; 
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.15); /* Feedback visual da marca */
+    transition: transform var(--transition-speed);
+}
+
+.logo:hover {
+    transform: scale(1.02);
 }
 
 .nav ul {
@@ -250,28 +260,4 @@ section {
         position: absolute;
         top: 70px;
         left: 0;
-        width: 100%;
-        background-color: var(--bg-secondary);
-        flex-direction: column;
-        text-align: center;
-        padding: 20px 0;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
-    }
-    
-    .nav.active {
-        display: flex;
-    }
-
-    .nav ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-}
+        width: 100
