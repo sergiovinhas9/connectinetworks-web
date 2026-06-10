@@ -1,196 +1,637 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConnecTI Networks - Conectando tecnologia, protegendo negócios</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConnecTI Networks – Conectando tecnologia, protegendo negócios</title>
+<meta name="description" content="Especialistas em Soluções de TI, Infraestrutura e Segurança da Informação para PMEs em Salvador e Região Metropolitana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep:  #0B3D22;
+    --green-dark:  #0F5C33;
+    --green-mid:   #157A43;
+    --green-light: #1E9E56;
+    --green-pale:  #E8F5EE;
+    --white:       #FFFFFF;
+    --off:         #F5FAF7;
+    --slate:       #6B8F7A;
+    --muted:       #4A6657;
+    --border:      #C8DED2;
+    --text-main:   #0D2718;
+    --text-body:   #2E4F3A;
+    --radius:      14px;
+    --font-display:'Syne', sans-serif;
+    --font-body:   'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--off); color: var(--text-body); line-height: 1.65; font-size: 16px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #F0F2F0;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #D4DDD6;
+    padding: 0 clamp(1.5rem,5vw,4rem);
+    height: 66px;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo img { height: 38px; width: auto; }
+
+  nav ul { display: flex; list-style: none; gap: 0; }
+  nav ul li a {
+    text-decoration: none; color: var(--green-deep);
+    font-size: 14px; font-weight: 600;
+    padding: 8px 14px; border-radius: 8px;
+    transition: color .2s, background .2s;
+  }
+  nav ul li a:hover { color: var(--green-mid); background: rgba(11,61,34,0.07); }
+
+  .nav-cta {
+    background: var(--green-deep) !important;
+    color: #fff !important; font-weight: 600 !important;
+    padding: 9px 20px !important; border-radius: 8px !important;
+    transition: opacity .2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85 !important; background: var(--green-deep) !important; }
+
+  .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--green-deep); }
+
+  /* HERO */
+  .hero {
+    background: var(--green-deep);
+    padding: clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -140px; right: -140px;
+    width: 540px; height: 540px;
+    background: radial-gradient(circle, rgba(30,158,86,0.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -80px; left: 8%;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(21,122,67,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 840px; position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(30,158,86,0.15); border: 1px solid rgba(30,158,86,0.35);
+    color: #5DD98A; font-size: 12px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 1.75rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px;
+    background: #5DD98A; border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.75)} }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem,5vw,3.6rem);
+    font-weight: 800; color: #fff;
+    line-height: 1.12; letter-spacing: -1px; margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg,#5DD98A,#A8F0C0);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub { color: rgba(255,255,255,.62); font-size: clamp(1rem,2vw,1.125rem); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.7; }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-light); color: #fff;
+    font-weight: 600; font-size: 15px; padding: 13px 26px; border-radius: 10px;
+    text-decoration: none; transition: opacity .2s, transform .15s;
+  }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: #fff;
+    font-weight: 500; font-size: 15px; padding: 13px 26px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.22); text-decoration: none;
+    transition: background .2s, border-color .2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.38); }
+
+  .region-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #5DD98A; font-weight: 600; margin-top: 1.25rem;
+  }
+  .region-tag svg { width: 14px; height: 14px; stroke: #5DD98A; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* STATS */
+  .stats {
+    background: var(--green-dark);
+    border-top: 1px solid rgba(30,158,86,.15);
+    border-bottom: 1px solid rgba(30,158,86,.15);
+    padding: 2rem clamp(1.5rem,5vw,4rem);
+  }
+  .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); }
+  .stat { text-align: center; padding: 1rem; position: relative; }
+  .stat + .stat::before {
+    content: ''; position: absolute; left: 0; top: 20%; height: 60%;
+    width: 1px; background: rgba(255,255,255,.1);
+  }
+  .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #5DD98A; line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,.55); font-weight: 500; }
+
+  /* SECTIONS */
+  section { padding: clamp(3.5rem,6vw,5.5rem) clamp(1.5rem,5vw,4rem); }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--green-mid); margin-bottom: .5rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.5vw,2.4rem); font-weight: 800; color: var(--green-deep); line-height: 1.15; letter-spacing: -.5px; margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin-bottom: 2.75rem; line-height: 1.7; }
+
+  /* SOBRE */
+  #sobre { background: #fff; }
+  .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .sobre-text p { color: var(--text-body); margin-bottom: 1rem; line-height: 1.75; }
+  .sobre-visual { background: var(--green-deep); border-radius: 20px; padding: 2.5rem; position: relative; overflow: hidden; }
+  .sobre-visual::after { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; background: radial-gradient(circle, rgba(30,158,86,.18), transparent 70%); }
+
+  .diffs-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 1; }
+  .diffs-list li { display: flex; align-items: flex-start; gap: 12px; color: rgba(255,255,255,.88); font-size: 14px; line-height: 1.5; }
+  .diff-icon { width: 28px; height: 28px; background: rgba(93,217,138,.12); border: 1px solid rgba(93,217,138,.28); border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .diff-icon svg { width: 14px; height: 14px; stroke: #5DD98A; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* SERVIÇOS */
+  #servicos { background: var(--off); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 1.25rem; }
+
+  .service-card {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.75rem; transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .service-card:hover { border-color: rgba(21,122,67,.35); box-shadow: 0 8px 32px rgba(11,61,34,.1); transform: translateY(-3px); }
+
+  .service-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; }
+  .service-icon svg { width: 22px; height: 22px; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+  .ic-a { background: #E6F5EC; } .ic-a svg { stroke: #0F5C33; }
+  .ic-b { background: #EAF3FD; } .ic-b svg { stroke: #1A7AC8; }
+  .ic-c { background: #F0ECFD; } .ic-c svg { stroke: #6840CC; }
+  .ic-d { background: #E8F5EE; } .ic-d svg { stroke: #157A43; }
+  .ic-e { background: #FEF4E5; } .ic-e svg { stroke: #B86A00; }
+  .ic-f { background: #F5F0FD; } .ic-f svg { stroke: #7530C8; }
+  .ic-g { background: #FDE8F0; } .ic-g svg { stroke: #B83060; }
+  .ic-h { background: #E4F5EC; } .ic-h svg { stroke: #0D7A3A; }
+
+  .service-name { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .service-tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--green-mid); margin-bottom: .65rem; opacity: .8; }
+  .service-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .service-features li { font-size: 13px; color: #4A6657; display: flex; align-items: flex-start; gap: 7px; line-height: 1.45; }
+  .service-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; margin-top: 6px; opacity: .55; }
+
+  /* DIFERENCIAIS */
+  #diferenciais { background: var(--green-deep); position: relative; overflow: hidden; }
+  #diferenciais::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(93,217,138,.1), transparent 70%); pointer-events: none; }
+  #diferenciais .section-title { color: #fff; }
+  #diferenciais .section-sub { color: rgba(255,255,255,.55); }
+  #diferenciais .section-eyebrow { color: #5DD98A; }
+
+  .diferenciais-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 1.25rem; }
+  .diff-card { background: rgba(255,255,255,.04); border: 1px solid rgba(93,217,138,.12); border-radius: var(--radius); padding: 1.5rem; transition: border-color .2s, background .2s; }
+  .diff-card:hover { border-color: rgba(93,217,138,.3); background: rgba(255,255,255,.07); }
+  .diff-num { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: #5DD98A; opacity: .6; margin-bottom: .75rem; }
+  .diff-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: .5rem; line-height: 1.3; }
+  .diff-text { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+  .tech-row { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(93,217,138,.12); }
+  .tech-label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 1.25rem; }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-tag { background: rgba(93,217,138,.08); border: 1px solid rgba(93,217,138,.18); color: #5DD98A; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 100px; }
+
+  /* CONTATO */
+  #contato { background: #fff; }
+  .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contato-desc { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 2rem; }
+
+  .contact-channels { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 12px; text-decoration: none; border: 1px solid var(--border); transition: border-color .2s, background .2s, transform .15s; background: #fff; }
+  .contact-link:hover { transform: translateX(4px); background: var(--off); }
+  .contact-link.whatsapp:hover  { border-color: #22C55E; }
+  .contact-link.email:hover     { border-color: #3B82F6; }
+  .contact-link.instagram:hover { border-color: #E1306C; }
+
+  .contact-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 20px; height: 20px; }
+  .ci-whatsapp  { background: #F0FDF4; }
+  .ci-email     { background: #EFF6FF; }
+  .ci-instagram { background: #FDF2F8; }
+
+  .contact-link-label { font-size: 12px; color: var(--slate); font-weight: 500; margin-bottom: 2px; }
+  .contact-link-value { font-size: 15px; font-weight: 600; color: var(--green-deep); }
+
+  /* FORM */
+  .form-card { background: var(--off); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+  .form-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+  .form-group label { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .form-group input, .form-group textarea, .form-group select {
+    border: 1px solid var(--border); border-radius: 9px; padding: 10px 14px;
+    font-family: var(--font-body); font-size: 14px; color: var(--text-main);
+    background: #fff; outline: none; transition: border-color .2s, box-shadow .2s; resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(21,122,67,.1);
+  }
+  .form-group textarea { min-height: 100px; }
+  .btn-form {
+    width: 100%; padding: 13px;
+    background: var(--green-deep); color: #fff;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    border: none; border-radius: 10px; cursor: pointer;
+    transition: background .2s, transform .15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px;
+  }
+  .btn-form:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer { background: var(--green-deep); padding: 2.5rem clamp(1.5rem,5vw,4rem); border-top: 1px solid rgba(93,217,138,.1); }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,.4); }
+  .footer-logo img { height: 32px; width: auto; filter: brightness(0) invert(1); opacity: .85; }
+
+  .footer-social { display: flex; gap: 10px; }
+  .social-btn { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background .2s, border-color .2s; }
+  .social-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(93,217,138,.3); }
+  .social-btn svg { width: 16px; height: 16px; }
+
+  /* WA FLOAT */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 58px; height: 58px; background: #22C55E; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; box-shadow: 0 6px 24px rgba(34,197,94,.45);
+    transition: transform .2s, box-shadow .2s;
+    animation: wa-appear .5s ease 1s both;
+  }
+  @keyframes wa-appear { from{opacity:0;transform:scale(.5)} to{opacity:1;transform:scale(1)} }
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(34,197,94,.55); }
+  .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+  .wa-tooltip { position: absolute; right: 68px; top: 50%; transform: translateY(-50%); background: var(--green-deep); color: #fff; font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+  .wa-float:hover .wa-tooltip { opacity: 1; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .nav-mobile-toggle { display: block; }
+    nav ul.open { display: flex; flex-direction: column; position: fixed; top: 66px; left: 0; right: 0; background: #F0F2F0; padding: 1rem; border-bottom: 1px solid #D4DDD6; }
+    .sobre-grid, .contato-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .stat + .stat::before { display: none; }
+    .wa-float { bottom: 20px; right: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <img src="logo.png" alt="ConnecTI Networks Logo" class="logo">
-            <nav class="nav">
-                <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#diferenciais">Diferenciais</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="logo.png">
+  </a>
+  <ul id="nav-menu">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="https://wa.me/5571996333998" class="nav-cta">Falar com especialista</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Salvador &amp; Região Metropolitana</div>
+    <h1>Conectando tecnologia,<br><em>protegendo negócios</em></h1>
+    <p class="hero-sub">Especialistas em infraestrutura de TI e segurança da informação para empresas que não podem parar. Atendimento remoto e presencial em toda a RMS.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5571996333998" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.563 4.144 1.547 5.878L0 24l6.317-1.515A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.522-5.185-1.43l-.371-.22-3.748.899.933-3.65-.242-.378A9.934 9.934 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Falar pelo WhatsApp
+      </a>
+      <a href="#servicos" class="btn-secondary">Ver soluções</a>
+    </div>
+    <div class="region-tag">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
+      Salvador · Lauro de Freitas · Camaçari · Simões Filho · toda a RMS
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Monitoramento</div></div>
+    <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Soluções próprias</div></div>
+    <div class="stat"><div class="stat-num">PME</div><div class="stat-label">Foco no segmento</div></div>
+    <div class="stat"><div class="stat-num">RMS</div><div class="stat-label">Atendimento local</div></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <div class="section-eyebrow">A ConnecTI Networks</div>
+        <h2 class="section-title">Seu parceiro tecnológico estratégico em Salvador</h2>
+        <p>Atuamos como extensão da equipe de TI da sua empresa, com foco em aumentar a disponibilidade dos sistemas, reduzir riscos operacionais e fortalecer a segurança digital da sua organização.</p>
+        <p>Entendemos os desafios das PMEs da Bahia: orçamento enxuto, equipe reduzida e alta dependência de tecnologia. Por isso oferecemos soluções escaláveis com atendimento remoto e presencial, sem burocracia.</p>
+        <a href="#contato" class="btn-primary" style="margin-top:1.5rem;display:inline-flex;">Entre em contato</a>
+      </div>
+      <div class="sobre-visual">
+        <ul class="diffs-list">
+          <li><div class="diff-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>Atendimento especializado para empresas e projetos escaláveis</li>
+          <li><div class="diff-icon"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>Monitoramento proativo 24×7 com alertas em tempo real</li>
+          <li><div class="diff-icon"><svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>Segurança em múltiplas camadas — perímetro, endpoint e nuvem</li>
+          <li><div class="diff-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>Equipe com experiência em infraestrutura, telecom e segurança</li>
+          <li><div class="diff-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>Redução de indisponibilidade com foco em continuidade de negócios</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="section-inner">
+    <div class="section-eyebrow">Portfólio de soluções</div>
+    <h2 class="section-title">Tudo que sua empresa precisa em TI</h2>
+    <p class="section-sub">Oito soluções integradas desenvolvidas para proteger e escalar o ambiente tecnológico das PMEs em Salvador.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon ic-a"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="service-tag">ConnecTI SecureGate</div>
+        <div class="service-name">Segurança da Informação</div>
+        <p class="service-desc">Proteção perimetral corporativa contra ameaças externas e internas.</p>
+        <ul class="service-features">
+          <li>Firewall corporativo e controle de acesso</li>
+          <li>Proteção contra malware e ransomware</li>
+          <li>VPN site-to-site e acesso remoto seguro</li>
+          <li>Failover de links e relatórios de segurança</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-b"><svg viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg></div>
+        <div class="service-tag">ConnecTI Managed Services</div>
+        <div class="service-name">Outsourcing e Gestão de TI</div>
+        <p class="service-desc">Terceirização completa da área de TI com suporte remoto e presencial.</p>
+        <ul class="service-features">
+          <li>Help Desk remoto e suporte presencial</li>
+          <li>Gestão de ativos e inventário automatizado</li>
+          <li>Administração de usuários e servidores</li>
+          <li>Documentação técnica e gestão de fornecedores</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-c"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+        <div class="service-tag">ConnecTI Sentinel</div>
+        <div class="service-name">Monitoramento e Observabilidade</div>
+        <p class="service-desc">Plataforma gerenciada para visibilidade total do ambiente corporativo.</p>
+        <ul class="service-features">
+          <li>Servidores Windows/Linux, firewalls e switches</li>
+          <li>Links de internet e aplicações corporativas</li>
+          <li>Serviços em nuvem e sistemas críticos</li>
+          <li>Stack: Zabbix, Grafana, Wazuh, GLPI</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-d"><svg viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
+        <div class="service-tag">ConnecTI Cloud Solutions</div>
+        <div class="service-name">Cloud e Virtualização</div>
+        <p class="service-desc">Modernização e migração segura para ambientes de nuvem.</p>
+        <ul class="service-features">
+          <li>Virtualização de servidores (VMware, Proxmox)</li>
+          <li>Backup em nuvem e Disaster Recovery</li>
+          <li>Migração para AWS e Microsoft 365</li>
+          <li>Ambientes híbridos e hospedagem corporativa</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-e"><svg viewBox="0 0 24 24"><path d="M5 12H3m18 0h-2M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="service-tag">ConnecTI Infrastructure</div>
+        <div class="service-name">Infraestrutura e Redes</div>
+        <p class="service-desc">Projetos completos de infraestrutura de rede corporativa.</p>
+        <ul class="service-features">
+          <li>Cabeamento estruturado e implantação de racks</li>
+          <li>Redes corporativas com VLANs</li>
+          <li>Switches gerenciáveis e Wi-Fi corporativo</li>
+          <li>Data Centers e salas de servidores</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-f"><svg viewBox="0 0 24 24"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg></div>
+        <div class="service-tag">ConnecTI Connect</div>
+        <div class="service-name">Telecomunicações e Conectividade</div>
+        <p class="service-desc">Soluções de comunicação empresarial de alta disponibilidade.</p>
+        <ul class="service-features">
+          <li>VPN corporativa e interligação de filiais</li>
+          <li>Balanceamento de links e failover</li>
+          <li>Telefonia IP e QoS para voz e vídeo</li>
+          <li>Redes MPLS e SD-WAN</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-g"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.89L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <div class="service-tag">ConnecTI Smart Security</div>
+        <div class="service-name">Segurança Eletrônica</div>
+        <p class="service-desc">Projetos integrados de segurança física e eletrônica.</p>
+        <ul class="service-features">
+          <li>CFTV IP e controle de acesso</li>
+          <li>Monitoramento remoto e gravação em nuvem</li>
+          <li>Cercas virtuais e analytics de vídeo</li>
+          <li>Integração com redes corporativas</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ic-h"><svg viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg></div>
+        <div class="service-tag">ConnecTI Backup &amp; Recovery</div>
+        <div class="service-name">Backup e Continuidade</div>
+        <p class="service-desc">Proteção e recuperação de dados com garantia de restauração.</p>
+        <ul class="service-features">
+          <li>Backup local, em nuvem e híbrido</li>
+          <li>Testes periódicos de restauração</li>
+          <li>Plano de recuperação de desastre (DRP)</li>
+          <li>Retenção segura e criptografada</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="section-inner">
+    <div class="section-eyebrow">Por que a ConnecTI</div>
+    <h2 class="section-title">O que nos diferencia</h2>
+    <p class="section-sub">Não somos só mais um prestador de TI — somos o parceiro que sua empresa precisa para crescer com segurança.</p>
+    <div class="diferenciais-grid">
+      <div class="diff-card"><div class="diff-num">01</div><div class="diff-title">Atendimento local em Salvador</div><div class="diff-text">Equipe baseada na Bahia com presença rápida em toda a Região Metropolitana de Salvador.</div></div>
+      <div class="diff-card"><div class="diff-num">02</div><div class="diff-title">Monitoramento proativo 24×7</div><div class="diff-text">Detectamos e resolvemos problemas antes que afetem sua operação, com alertas automáticos em tempo real.</div></div>
+      <div class="diff-card"><div class="diff-num">03</div><div class="diff-title">Segurança em múltiplas camadas</div><div class="diff-text">Protegemos perímetro, endpoints, identidade e nuvem — uma abordagem integrada que não deixa brechas.</div></div>
+      <div class="diff-card"><div class="diff-num">04</div><div class="diff-title">Foco em PMEs</div><div class="diff-text">Soluções escaláveis pensadas para o orçamento e a realidade das empresas médias e pequenas da Bahia.</div></div>
+      <div class="diff-card"><div class="diff-num">05</div><div class="diff-title">Equipe multidisciplinar</div><div class="diff-text">Especialistas em infraestrutura, telecomunicações, segurança e nuvem — tudo em um único parceiro.</div></div>
+      <div class="diff-card"><div class="diff-num">06</div><div class="diff-title">Continuidade do negócio</div><div class="diff-text">Nossa missão é que sua empresa nunca pare. DR testado, backup verificado e alta disponibilidade como padrão.</div></div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-label">Tecnologias que utilizamos</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Zabbix</span><span class="tech-tag">Grafana</span><span class="tech-tag">Wazuh</span><span class="tech-tag">GLPI</span><span class="tech-tag">Tactical RMM</span><span class="tech-tag">pfSense</span><span class="tech-tag">AWS</span><span class="tech-tag">Microsoft 365</span><span class="tech-tag">VMware</span><span class="tech-tag">Proxmox</span><span class="tech-tag">SD-WAN</span><span class="tech-tag">MPLS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-inner">
+    <div class="contato-grid">
+      <div>
+        <div class="section-eyebrow">Fale conosco</div>
+        <h2 class="section-title">Pronto para proteger e alavancar seu negócio?</h2>
+        <p class="contato-desc">Entre em contato com nossos especialistas. Respondemos em até 2 horas em dias úteis — ou imediatamente pelo WhatsApp.</p>
+        <div class="contact-channels">
+
+          <a href="https://wa.me/5571996333998" class="contact-link whatsapp" target="_blank" rel="noopener">
+            <div class="contact-icon ci-whatsapp">
+              <svg viewBox="0 0 24 24" fill="#22C55E"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.563 4.144 1.547 5.878L0 24l6.317-1.515A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.522-5.185-1.43l-.371-.22-3.748.899.933-3.65-.242-.378A9.934 9.934 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
             </div>
+            <div><div class="contact-link-label">WhatsApp</div><div class="contact-link-value">Falar com especialista</div></div>
+          </a>
+
+          <a href="mailto:contato@connectinetworks.com.br" class="contact-link email">
+            <div class="contact-icon ci-email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div class="contact-link-label">E-mail</div><div class="contact-link-value">contato@connectinetworks.com.br</div></div>
+          </a>
+
+          <a href="https://instagram.com/connectinetworks" class="contact-link instagram" target="_blank" rel="noopener">
+            <div class="contact-icon ci-instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div><div class="contact-link-label">Instagram</div><div class="contact-link-value">@connectinetworks</div></div>
+          </a>
+
         </div>
-    </header>
+      </div>
 
-    <main>
-        <section class="hero" id="inicio">
-            <div class="container">
-                <h2>Conectando tecnologia, protegendo negócios e impulsionando resultados.</h2>
-                <p>Especialistas em Soluções de TI, Infraestrutura e Segurança da Informação para PMEs em Salvador e Região Metropolitana.</p>
-                <a href="#servicos" class="btn">Conheça Nossas Soluções</a>
-            </div>
-        </section>
+      <div class="form-card">
+        <div class="form-title">Solicite um diagnóstico gratuito</div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label for="nome">Nome</label><input type="text" id="nome" placeholder="Seu nome" required></div>
+            <div class="form-group"><label for="empresa">Empresa</label><input type="text" id="empresa" placeholder="Nome da empresa"></div>
+          </div>
+          <div class="form-group"><label for="email-input">E-mail</label><input type="email" id="email-input" placeholder="seu@email.com.br" required></div>
+          <div class="form-group">
+            <label for="servico">Serviço de interesse</label>
+            <select id="servico">
+              <option value="">Selecione uma solução...</option>
+              <option>SecureGate – Segurança da Informação</option>
+              <option>Managed Services – Outsourcing de TI</option>
+              <option>Sentinel – Monitoramento</option>
+              <option>Cloud Solutions – Nuvem</option>
+              <option>Infrastructure – Redes</option>
+              <option>Connect – Telecomunicações</option>
+              <option>Smart Security – CFTV</option>
+              <option>Backup &amp; Recovery</option>
+              <option>Não sei ainda, quero conversar</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="mensagem">Mensagem</label><textarea id="mensagem" placeholder="Conte um pouco sobre sua empresa e o que precisa..."></textarea></div>
+          <button type="submit" class="btn-form" id="submit-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section class="about" id="sobre">
-            <div class="container">
-                <h3>A ConnecTI Networks</h3>
-                <p>Atuamos como seu parceiro tecnológico estratégico, focados em aumentar a disponibilidade, reduzir riscos operacionais e fortalecer a segurança digital da sua organização. Transformamos tecnologia em diferencial competitivo.</p>
-            </div>
-        </section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo" style="margin-bottom:8px;">
+        <img src="logo.png">
+      </div>
+      <div class="footer-copy">© 2026 ConnecTI Networks. Soluções em TI para PMEs em Salvador e RMS.<br>Todos os direitos reservados.</div>
+    </div>
+    <div class="footer-social">
+      <a href="https://wa.me/5571996333998" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.563 4.144 1.547 5.878L0 24l6.317-1.515A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.522-5.185-1.43l-.371-.22-3.748.899.933-3.65-.242-.378A9.934 9.934 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      </a>
+      <a href="mailto:contato@connectinetworks.com.br" class="social-btn" aria-label="E-mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a href="https://instagram.com/connectinetworks" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
 
-        <section class="services" id="servicos">
-            <div class="container">
-                <h3>Portfólio Central de Serviços</h3>
-                <div class="services-grid">
-                    
-                    <div class="service-card">
-                        <button class="accordion">🔐 Segurança da Informação (ConnecTI SecureGate)</button>
-                        <div class="panel">
-                            <p>Solução de segurança perimetral para proteção corporativa.</p>
-                            <ul>
-                                <li>Firewall corporativo e Controle de acesso à internet</li>
-                                <li>Bloqueio de aplicações e categorias de sites</li>
-                                <li>Proteção contra malware e ransomware</li>
-                                <li>VPN Site-to-Site e acesso remoto seguro</li>
-                                <li>Controle de banda e priorização de tráfego</li>
-                                <li>Failover de links de internet</li>
-                                <li>Relatórios de segurança e Monitoramento proativo</li>
-                            </ul>
-                        </div>
-                    </div>
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5571996333998" class="wa-float" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+  <span class="wa-tooltip">Falar com especialista</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.563 4.144 1.547 5.878L0 24l6.317-1.515A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.522-5.185-1.43l-.371-.22-3.748.899.933-3.65-.242-.378A9.934 9.934 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
 
-                    <div class="service-card">
-                        <button class="accordion">🖥️ Outsourcing e Gestão de TI (ConnecTI Managed Services)</button>
-                        <div class="panel">
-                            <p>Serviço de terceirização completa da área de TI.</p>
-                            <ul>
-                                <li>Help Desk remoto e Suporte presencial</li>
-                                <li>Gestão de ativos e Inventário automatizado</li>
-                                <li>Gestão de usuários e Administração de servidores</li>
-                                <li>Atualizações e patches</li>
-                                <li>Documentação técnica e Gestão de fornecedores de tecnologia</li>
-                            </ul>
-                        </div>
-                    </div>
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const nome    = document.getElementById('nome').value;
+  const empresa = document.getElementById('empresa').value;
+  const email   = document.getElementById('email-input').value;
+  const servico = document.getElementById('servico').value;
+  const msg     = document.getElementById('mensagem').value;
+  const texto = `Olá! Vim pelo site da ConnecTI Networks.%0A%0A*Nome:* ${nome}%0A*Empresa:* ${empresa||'Não informado'}%0A*E-mail:* ${email}%0A*Serviço:* ${servico||'Não especificado'}%0A*Mensagem:* ${msg||'Gostaria de mais informações.'}`;
+  window.open(`https://wa.me/5571996333998?text=${texto}`, '_blank');
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = '✓ Redirecionando para WhatsApp...';
+  btn.style.background = '#157A43';
+  setTimeout(() => {
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
+    btn.style.background = '';
+  }, 3000);
+}
+</script>
 
-                    <div class="service-card">
-                        <button class="accordion">📊 Monitoramento e Observabilidade (ConnecTI Sentinel)</button>
-                        <div class="panel">
-                            <p>Plataforma de monitoramento gerenciado para ambientes corporativos.</p>
-                            <ul>
-                                <li>Monitoramento de Servidores Windows e Linux, Firewalls, Switches e Roteadores</li>
-                                <li>Monitoramento de Links de internet, Sistemas críticos, Aplicações corporativas e Serviços em nuvem</li>
-                                <li><strong>Tecnologias:</strong> Zabbix, Grafana, Wazuh, GLPI, Tactical RMM</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <button class="accordion">☁️ Cloud e Virtualização (ConnecTI Cloud Solutions)</button>
-                        <div class="panel">
-                            <p>Projetos de modernização e migração para nuvem.</p>
-                            <ul>
-                                <li>Virtualização de servidores</li>
-                                <li>Backup em nuvem e Disaster Recovery</li>
-                                <li>Migração para AWS</li>
-                                <li>Microsoft 365</li>
-                                <li>Hospedagem corporativa e Ambientes híbridos</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <button class="accordion">🌐 Infraestrutura e Redes (ConnecTI Infrastructure)</button>
-                        <div class="panel">
-                            <p>Projetos completos de infraestrutura corporativa.</p>
-                            <ul>
-                                <li>Cabeamento estruturado e Implantação de racks</li>
-                                <li>Redes corporativas e VLANs</li>
-                                <li>Switches gerenciáveis e Wi-Fi corporativo</li>
-                                <li>Redes para filiais, Data Centers e Salas de servidores</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <button class="accordion">📡 Telecomunicações e Conectividade (ConnecTI Connect)</button>
-                        <div class="panel">
-                            <p>Soluções para comunicação e conectividade empresarial.</p>
-                            <ul>
-                                <li>VPN corporativa e Interligação de filiais</li>
-                                <li>Balanceamento de links e Failover de internet</li>
-                                <li>Telefonia IP e QoS para voz e vídeo</li>
-                                <li>Redes MPLS e SD-WAN</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <button class="accordion">📹 Segurança Eletrônica (ConnecTI Smart Security)</button>
-                        <div class="panel">
-                            <p>Projetos integrados de segurança física.</p>
-                            <ul>
-                                <li>CFTV IP e Controle de acesso</li>
-                                <li>Monitoramento remoto e Gravação em nuvem</li>
-                                <li>Cercas virtuais</li>
-                                <li>Integração com redes corporativas</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <button class="accordion">💾 Backup e Continuidade de Negócios (ConnecTI Backup & Recovery)</button>
-                        <div class="panel">
-                            <p>Proteção e recuperação de dados corporativos.</p>
-                            <ul>
-                                <li>Backup local, Backup em nuvem e Backup híbrido</li>
-                                <li>Testes de restauração</li>
-                                <li>Plano de recuperação de desastre</li>
-                                <li>Retenção segura de dados</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="differentiators" id="diferenciais">
-            <div class="container">
-                <h3>Diferenciais da ConnecTI Networks</h3>
-                <ul>
-                    <li>Atendimento especializado para empresas e Projetos escaláveis.</li>
-                    <li>Monitoramento proativo 24x7 e Segurança em múltiplas camadas.</li>
-                    <li>Equipe com experiência em infraestrutura, telecomunicações e segurança.</li>
-                    <li>Redução de indisponibilidade operacional e Foco em continuidade de negócios.</li>
-                    <li>Atendimento remoto e presencial.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="contact" id="contato">
-            <div class="container">
-                <h3>Pronto para proteger e alavancar seu negócio?</h3>
-                <p>Entre em contato com nossos especialistas.</p>
-                <a href="mailto:contato@connectinetworks.com.br" class="btn">Enviar E-mail</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 ConnecTI Networks. Soluções em TI. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
 </body>
 </html>
